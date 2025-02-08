@@ -15,6 +15,8 @@ public class Lerp0 : MonoBehaviour
     float time = 0f;
     Vector3[] initPos;
     Vector3[] startPosition, endPosition;
+    float startHue;
+    float[] endHues;
     float lerpFraction; // Lerp point between 0~1
     float t;
 
@@ -26,6 +28,8 @@ public class Lerp0 : MonoBehaviour
         initPos = new Vector3[numSphere]; // Start positions
         startPosition = new Vector3[numSphere]; 
         endPosition = new Vector3[numSphere]; 
+        startHue = 0;
+        endHues = new float[numSphere];
         
         // Define target positions. Start = random, End = heart 
         for (int i =0; i < numSphere; i++){
@@ -35,13 +39,18 @@ public class Lerp0 : MonoBehaviour
 
             r = 3f; // radius of the circle
             // Circular end position
-            endPosition[i] = new Vector3(r * Mathf.Sin(i * 2 * Mathf.PI / numSphere), r * Mathf.Cos(i * 2 * Mathf.PI / numSphere));
+            float sin_t = Mathf.Sin(i * 2 * Mathf.PI / numSphere);
+            float cos_t = Mathf.Cos(i * 2 * Mathf.PI / numSphere);
+            float size = 2f;
+            endPosition[i] = new Vector3(size * Mathf.Sqrt(2) * Mathf.Pow(sin_t, 3), size * (-Mathf.Pow(cos_t, 3) - Mathf.Pow(cos_t, 2) + 2 * cos_t));
+
+            endHues[i] = Random.Range(0, 1f);
         }
         // Let there be spheres..
         for (int i =0; i < numSphere; i++){
             // Draw primitive elements:
             // https://docs.unity3d.com/6000.0/Documentation/ScriptReference/GameObject.CreatePrimitive.html
-            spheres[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere); 
+            spheres[i] = GameObject.CreatePrimitive(PrimitiveType.Cube); 
 
             // Position
             initPos[i] = startPosition[i];
@@ -81,7 +90,8 @@ public class Lerp0 : MonoBehaviour
             // Color Update over time
             Renderer sphereRenderer = spheres[i].GetComponent<Renderer>();
             float hue = (float)i / numSphere; // Hue cycles through 0 to 1
-            Color color = Color.HSVToRGB(Mathf.Abs(hue * Mathf.Sin(time)), Mathf.Cos(time), 2f + Mathf.Cos(time)); // Full saturation and brightness
+            // Color color = Color.HSVToRGB(Mathf.Abs(hue * Mathf.Sin(time)), Mathf.Cos(time), 2f + Mathf.Cos(time)); // Full saturation and brightness
+            Color color = Color.HSVToRGB(Mathf.Abs(endHues[i] * Mathf.Sin(time - Mathf.PI/2f)), 1f, 1f); // Full saturation and brightness
             sphereRenderer.material.color = color;
         }
     }
