@@ -1,8 +1,10 @@
-![heart](https://github.com/user-attachments/assets/f0c91918-60bf-4130-a0e5-c473b6071378)
+
+<img width="421" alt="Finished Heart" src="https://github.com/user-attachments/assets/9e5bcbd1-9c07-4cb7-8ecd-646975a7d2cf" />
+<img width="479" alt="Random Cubes" src="https://github.com/user-attachments/assets/e254467a-3b0e-4430-9405-cbeb6a82ac47" />
 
 IMDM 290 
 
 2025 Spring
 
 Course Material 
-![Untitled video - Made with Clipchamp (8)](https://github.com/user-attachments/assets/f862236a-a226-4e8f-8bfd-47c7161032da)
+![Uploading Finished Heart.png…]()
